@@ -25,7 +25,7 @@
         android:usesCleartextTraffic="true"
         android:name=".TetherApplication"
         tools:targetApi="m">
-        <activity android:name=".TetherActivity" >
+        <activity android:name=".TetherActivity" android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

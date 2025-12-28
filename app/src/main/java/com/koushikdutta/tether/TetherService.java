@@ -30,7 +30,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import junit.framework.Assert;
 
 public class TetherService extends Service {
     private static final String LOGTAG = "Tether";
@@ -156,7 +155,6 @@ public class TetherService extends Service {
                                 byte[] ip = new byte[4];
                                 bb.get(ip);
                                 int port = bb.getInt();
-                                Assert.assertTrue(bb.position() == bb.limit() || bb.position() == bb.limit() + -1);
                                 final int i = socket;
                                 ConnectCallback connectCallback = new ConnectCallback() {
                                     public void onRemoteClosed() {
@@ -241,7 +239,7 @@ public class TetherService extends Service {
                                 writeCommand(6, (byte) 3);
                             }
                         } else {
-                            Assert.fail();
+                            Log.e(LOGTAG, "Unexpected condition");
                         }
                     }
                 });
@@ -257,7 +255,6 @@ public class TetherService extends Service {
                     dout.writeInt(0);
                     dout.flush();
                     byte[] bytes = bout.toByteArray();
-                    Assert.assertEquals(bytes.length, 9);
                     this.mLocalSink.write(new ByteBufferList(ByteBuffer.wrap(bytes)));
                 } catch (Exception e) {
                     e.printStackTrace();
